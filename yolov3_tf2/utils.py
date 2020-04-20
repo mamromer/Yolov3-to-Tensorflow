@@ -2,6 +2,13 @@ from absl import logging
 import numpy as np
 import tensorflow as tf
 import cv2
+from tensorflow.compat.v1 import ConfigProto
+from tensorflow.compat.v1 import InteractiveSession
+
+config = ConfigProto()
+config.gpu_options.per_process_gpu_memory_fraction = 0.7
+config.gpu_options.allow_growth = True
+session = InteractiveSession(config=config)
 
 YOLOV3_LAYER_LIST = [
     'yolo_darknet',
