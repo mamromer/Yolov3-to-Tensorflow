@@ -24,6 +24,10 @@ tf.app.flags.DEFINE_string(
 
 
 def main(argv=None):
+    physical_devices = tf.config.experimental.list_physical_devices('GPU')
+    if len(physical_devices) > 0:
+        tf.config.experimental.set_memory_growth(physical_devices[0], True)
+        
     if FLAGS.tiny:
         model = yolo_v3_tiny.yolo_v3_tiny
     elif FLAGS.spp:
